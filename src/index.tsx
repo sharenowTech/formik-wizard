@@ -1,7 +1,7 @@
 import { Form as DefaultForm, Formik, FormikProps } from 'formik'
 import produce from 'immer'
 import React from 'react'
-import { Step as AlbusStep, Steps as AlbusSteps, Wizard as AlbusWizard, WizardContext } from 'react-albus'
+import { Step as AlbusStep, Wizard as AlbusWizard, WizardContext } from 'react-albus'
 
 import {
   FormikWizardBaseValues,
@@ -10,6 +10,9 @@ import {
   FormikWizardStepType,
   FormikWizardWrapperProps,
 } from './types'
+
+// @ts-ignore
+import AlbusSteps from './AlbusSteps.js'
 
 function getInitialValues(steps: FormikWizardStepType[]) {
   return steps.reduce<FormikWizardBaseValues>((curr, next) => {
@@ -170,7 +173,7 @@ export function FormikWizard<T>({
           setValues,
         }}
       >
-        <AlbusSteps>
+        <AlbusSteps steps={stepIds}>
           {steps.map((step) => (
             <AlbusStep
               key={step.id}
